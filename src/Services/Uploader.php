@@ -1,10 +1,10 @@
 <?php
 
-namespace Igwe\Services;
+namespace App\Igwe;
 
 //require_once '../../vendor/autoload.php';
 
-use App\Services\IgweTrait;
+use App\Igwe\IgweTrait;
 
 // import the Intervention Image Manager Class
 use Intervention\Image\ImageManagerStatic as Image;

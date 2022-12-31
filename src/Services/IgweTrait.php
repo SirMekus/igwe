@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Igwe;
 
 trait IgweTrait
 {
@@ -39,7 +39,7 @@ trait IgweTrait
 		{
 			throw new \Exception("no cryptographically secure random function available");
         }
-		
+
         return substr($prefix.bin2hex($bytes), 0, $length);
     }
 
