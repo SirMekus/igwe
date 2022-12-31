@@ -18,7 +18,7 @@ Written By: SIRMEKUS                                                   ¦
                                                                     ¦
 ************************************************************************/
 
-function config($key)
+function settings($key)
 {
 	$config = include rootDir().'/config/igwe.php';
     

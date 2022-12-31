@@ -18,21 +18,21 @@ class Uploader
 
 	public function __construct()
 	{
-		$this->width = config("width");
+		$this->width = settings("width");
 		
-		$this->height = config("height");
+		$this->height = settings("height");
 		
-		$this->valid_mimes = config("mime_type");
+		$this->valid_mimes = settings("mime_type");
 		
-		$this->max_file_upload_size = config("max_size");
+		$this->max_file_upload_size = settings("max_size");
 		
-		$this->max_no_of_file_to_upload = config("max_to_upload");
+		$this->max_no_of_file_to_upload = settings("max_to_upload");
 
-		$this->sub_folder = config("sub_folder");
+		$this->sub_folder = settings("sub_folder");
 
-		$this->docParentFolder = config('directory') ?? 'uploads';
+		$this->docParentFolder = settings('directory') ?? 'uploads';
 
-		$this->prefix = config('prefix') ?? 'igwe';
+		$this->prefix = settings('prefix') ?? 'igwe';
 	}
 
 	//Returns an array/string with the renamed file as value.
