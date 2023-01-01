@@ -4,7 +4,6 @@ namespace App\Igwe;
 
 trait IgweTrait
 {
-    //This is the folder from the "public" directory that should be accessible from the web 
 	public $docParentFolder;
 
 	public $sub_folder;
