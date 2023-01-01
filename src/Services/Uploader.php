@@ -54,7 +54,6 @@ class Uploader
 				return;
 			} else {
 				response("Please upload an image or file.", 422);
-				exit;
 			}
 		}
 
@@ -62,7 +61,7 @@ class Uploader
 
 		//We expect a maximum number of $max_no_of_file_to_upload images to upload, if it's more than then we issue an error warning.
 		if (is_array($file["name"]) and (count($file["name"]) > $this->max_no_of_file_to_upload)) {
-			response("Exceeded maximum number of products to upload. You can only upload " . $this->max_no_of_file_to_upload . " maximum number of products.", 422);
+			response("Exceeded maximum number of images/files to upload. You can only upload " . $this->max_no_of_file_to_upload . " maximum number of images/files.", 422);
 		}
 
 		if (is_array($file["name"])) {
@@ -81,7 +80,7 @@ class Uploader
 							throw new \RuntimeException("No file sent.");
 						case UPLOAD_ERR_INI_SIZE:
 						case UPLOAD_ERR_FORM_SIZE:
-							throw new \RuntimeException("{$file["name"][$i]} exceeded filesize limit.");
+							throw new \RuntimeException("{$file["name"][$i]} exceeds filesize limit.");
 						default:
 							throw new \RuntimeException("Unknown error");
 					}
@@ -208,7 +207,7 @@ class Uploader
 						$constraint->aspectRatio();
 					})->encode($extension);
 
-					$path = $img->save($this->getDirectory() . $new_name, 75);;
+					$path = $img->save($this->getDirectory() . $new_name, 75);
 				} else {
 					$path = move_uploaded_file($tmp_name, $this->getDirectory() . $new_name);
 				}
