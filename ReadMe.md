@@ -1,4 +1,4 @@
-# Elu
+# Igwe
 
 Igwe is a PHP file uploader with validation support to add power to an exisitng web app. One of the additional benefits include enforcing (or constraining) image dimension. For instance, imagine your application expects image dimension to be 300/300px (height/width) and a user uploads an image with a dimension of 500/200px. Strictly constraining the dimension (using traditional approach) may result in low quality and a not-too-nice image. This library takes care of this effectively without sacrificing quality of the uploaded image.
 
