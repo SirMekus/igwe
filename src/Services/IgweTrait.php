@@ -23,6 +23,8 @@ trait IgweTrait
 
 	public $prefix;
 
+	public $log_path;
+
 	public function unique_name($length = 13) 
 	{
 		$prefix = $this->prefix."_".date("Ymd");
@@ -45,7 +47,7 @@ trait IgweTrait
 
 	public function getDirectory()
 	{
-		return rootDir(). (!empty($this->sub_folder) ? $this->docParentFolder.'/'.$this->sub_folder : $this->docParentFolder);
+		return rootDir().'/'. (!empty($this->sub_folder) ? $this->docParentFolder.'/'.$this->sub_folder : $this->docParentFolder).'/';
 	}
 
 	public function isImage($filetype)
@@ -106,4 +108,12 @@ trait IgweTrait
         }
         return $result;
     }
+
+	public function getType($file)
+	{
+		$info = new \finfo(FILEINFO_MIME_TYPE);
+
+		return $info->file($file);
+
+	}
 }

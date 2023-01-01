@@ -32,7 +32,7 @@ function settings($key)
     }
     else
     {
-        throw new \RuntimeException("You need to create an 'igwe.php' file as specified in the documentation. Please consult the ReadMe file for more information.");
+        return null;
     }
 
 	return isset($config[$key]) ? $config[$key]: null;
