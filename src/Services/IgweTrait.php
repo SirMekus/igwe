@@ -24,7 +24,7 @@ trait IgweTrait
 
 	public $log_path;
 
-	public function unique_name($length = 13) 
+	public function unique_name($length = 30) 
 	{
 		$prefix = $this->prefix."_".date("Ymd");
 		
