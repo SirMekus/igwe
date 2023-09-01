@@ -113,6 +113,5 @@ trait IgweTrait
 		$info = new \finfo(FILEINFO_MIME_TYPE);
 
 		return $info->file($file);
-
 	}
 }

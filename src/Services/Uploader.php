@@ -53,7 +53,7 @@ class Uploader
 			if ($ignore == true) {
 				return;
 			} else {
-				response("Please upload an image or file.", 422);
+				return response("Please upload an image or file.", 422);
 			}
 		}
 
@@ -73,16 +73,17 @@ class Uploader
 						continue;
 					}
 
-					switch ($file['error'][$i]) {
+					switch ($file['error'][$i]) 
+					{
 						case UPLOAD_ERR_OK:
 							break;
 						case UPLOAD_ERR_NO_FILE:
-							throw new \RuntimeException("No file sent.");
+							return response("No file sent.", 422);
 						case UPLOAD_ERR_INI_SIZE:
 						case UPLOAD_ERR_FORM_SIZE:
-							throw new \RuntimeException("{$file["name"][$i]} exceeds filesize limit.");
+							return response("{$file["name"][$i]} exceeds filesize limit.", 422);
 						default:
-							throw new \RuntimeException("Unknown error");
+						    return response("Unknown error.", 422);
 					}
 
 					$typeOfFile = $this->isImage($file["tmp_name"][$i]) ? 'image' : 'file';
@@ -90,7 +91,8 @@ class Uploader
 					$file_type = $this->getType($file["tmp_name"][$i]);
 
 					//if file type is not any of these specified types
-					if (!in_array($file_type, $this->valid_mimes)) {
+					if (!in_array($file_type, $this->valid_mimes)) 
+					{
 						response("Invalid $typeOfFile format detected for " . $file["name"][$i] . ". Accepted format(s) is/are:" . $this->getAllowedTypes(), 422);
 					}
 
@@ -110,11 +112,12 @@ class Uploader
 					case UPLOAD_ERR_OK:
 						break;
 					case UPLOAD_ERR_NO_FILE:
-						throw new \RuntimeException("No file sent.");
+						response("No file sent.", 422);
 					case UPLOAD_ERR_INI_SIZE:
 					case UPLOAD_ERR_FORM_SIZE:
-						throw new \RuntimeException("{$file["name"]} exceeded filesize limit.");
+						response("{$file["name"]} exceeded filesize limit.", 422);
 					default:
+					    response("Unknown errors.", 422);
 						throw new \RuntimeException("Unknown errors");
 				}
 
@@ -223,21 +226,27 @@ class Uploader
 
 	public function remove($file)
 	{
-		if (is_array($file)) {
-			for ($i = 0; $i < count($file); $i++) {
-				if (!@unlink($this->getDirectory() . $file[$i])) //if file couldn't be deleted then exit and do nothing which also means it won't be deleted from database.
+		if (is_array($file)) 
+		{
+			for ($i = 0; $i < count($file); $i++) 
+			{
+				//if file couldn't be deleted then exit and do nothing which also means it won't be deleted from database.
+				if (!@unlink($this->getDirectory() . $file[$i])) 
 				{
 					//We log it. We'll manually delete it ourselves.
-					$content = "Failed to delete " . $this->full_path . "/{$file[$i]} ' on " . date("Y-m-d H:i:s") . ". Please delete it manually.\n";
+					$content = "Failed to delete " . $this->getDirectory() . $file[$i]." on " . date("Y-m-d H:i:s") . ". Please delete it manually.\n";
 
 					$this->writeToFile($content);
 				}
 			}
-		} else {
-			if (!@unlink($this->getDirectory() . "$file")) //if file couldn't be deleted then exit and do nothing which also means it won't be deleted from database.
+		} 
+		else 
+		{
+			//if file couldn't be deleted then exit and do nothing which also means it won't be deleted from database.
+			if (!@unlink($this->getDirectory() . $file)) 
 			{
 				//We log it. We'll manually delete it ourselves.
-				$content = "Failed to delete " . $this->getDirectory() . "/$file, ' on " . date("Y-m-d H:i:s") . ". Please delete it manually.\n";
+				$content = "Failed to delete " . $this->getDirectory() . $file." on " . date("Y-m-d H:i:s") . ". Please delete it manually.\n";
 
 				$this->writeToFile($content);
 			}

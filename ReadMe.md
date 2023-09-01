@@ -142,7 +142,7 @@ $image = (new Uploader)->remove($image);
 
  You can connect with me on [LinkedIn](https://www.linkedin.com/in/sirmekus) for insightful tips and so we can grow our networks together.
 
- Patronise us on [Webloit](https://www.webloit.com).
+ Check our educational platform for High Schools [i-runs](https://www.i-runs.com).
 
  And follow me on [Twitter](https://www.twitter.com/Sire_Mekus).
 
